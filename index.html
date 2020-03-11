@@ -1,0 +1,165 @@
+<html lang="en">
+
+<head>
+
+    <!--https://css-tricks.com/seamless-responsive-photo-grid/-->
+    <style>
+        .photoGallery {
+            line-height: 0;
+            
+            -webkit-column-count: 5;
+            -webkit-column-gap:   0px;
+            -moz-column-count:    5;
+            -moz-column-gap:      0px;
+            column-count:         5;
+            column-gap:           0px;
+        }
+
+        .photoGallery img {
+            cursor: pointer;
+            width: 97% !important;
+            height: auto !important;
+            margin-bottom: 8px;
+        }
+
+        .selectedPhoto {
+            text-align: center;
+        }
+
+        .selectedPhoto img {
+            margin-top: 25px;
+            margin-bottom: 25px;
+            width: 75% !important;
+            height: auto !important;
+        }
+
+        .like-button {
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .like-button button{
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 1200px) {
+            .photoGallery {
+            -moz-column-count:    4;
+            -webkit-column-count: 4;
+            column-count:         4;
+            }
+        }
+        @media (max-width: 1000px) {
+            .photoGallery {
+            -moz-column-count:    3;
+            -webkit-column-count: 3;
+            column-count:         3;
+            }
+        }
+        @media (max-width: 800px) {
+            .photoGallery {
+            -moz-column-count:    2;
+            -webkit-column-count: 2;
+            column-count:         2;
+            }
+        }
+        @media (max-width: 400px) {
+            .photoGallery {
+            -moz-column-count:    1;
+            -webkit-column-count: 1;
+            column-count:         1;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+    </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <!--<script src="/socket.io/socket.io.js"></script>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Photo Contest</title>
+
+</head>
+
+<body>
+
+    <div style="margin-bottom: 0px" class="jumbotron">
+        <h1 class="display-4">Photo Contest</h1>
+        <p class="lead">British Columbia's monthly contest for the best landscape photo. Vote for your favourite!</p>
+        <hr class="my-4">
+        <p>You can upload a photo for a chance to win a Whistler Lift Ticket!</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="/uploadPhoto.html" role="button">Join</a>
+        </p>
+    </div>
+    <div class="selectedPhoto"></div>
+    <div class="like-button"></div>
+    <div class="photoGallery"></div>
+</body>
+
+</html>
+
+<script>
+    let like_count
+    $(() => {
+        //loads all the pictures in the database
+        $('.photoGallery').on('click','img',function(){
+            let photoID = $(this).attr('id')
+            //shows the selected photo at the top and a like button for the specific photo
+            selectPhoto(photoID)
+            }
+        )
+        //makes the like button clickable. adds like to the photo and increments the like on the button
+        $('.like-button').on('click','button',function(){
+            let photoID_button = $(this).attr('id')
+            addLike(photoID_button)
+            getlikes(photoID_button)
+            }
+        )
+        getPhotos()
+    })
+
+    //retrieves all the photos in the database
+    function getPhotos() {
+        $.get('http://localhost:3000/photos', (photo) => {
+            photo.forEach(addPhoto);
+        })
+    }
+
+    //gets the number of likes on the photo and creates a like button 
+    function getlikes(image) {
+        $.get(`http://localhost:3000/likes/${image}`, (object) => {
+            $(".like-button").empty()
+            $(".like-button").append(`<button type="button" class="btn btn-primary btn-lg" id="${image}"><span class="glyphicon">&#xe125;</span> ${object.likes}</button>`)
+        })
+    }
+
+    //adds photo the photo gallery on the homepage
+    function addPhoto(contestPhoto){
+        $(".photoGallery").append(`<img src="/photo/${contestPhoto.filename}" id="${contestPhoto.filename}">`)
+    }
+
+    //makes the clicked photo enlarged at the top of the page
+    function selectPhoto(clickedPhoto) {
+        $(".selectedPhoto").empty()
+        $(".selectedPhoto").append(`<img src="/photo/${clickedPhoto}">`)
+        getlikes(clickedPhoto)
+        window.scrollTo(0, 0)
+    }
+
+    //add a like to the photo
+    function addLike(clickedPhoto) {
+        $.post(`http://localhost:3000/like/${clickedPhoto}`)
+    }
+
+</script>
