@@ -131,17 +131,32 @@
 
     //retrieves all the photos in the database
     function getPhotos() {
-        $.get('https://photo-contest-project.herokuapp.com/photos', (photo) => {
+        $.ajax({
+            url: 'https://photo-contest-project.herokuapp.com/photos',
+            type: "GET",
+            data: "JSON"
+            }).done(function(photo) {
+                photo.forEach(addPhoto);
+            })
+        /**$.get('https://photo-contest-project.herokuapp.com/photos', (photo) => {
             photo.forEach(addPhoto);
-        })
+        })**/
     }
 
     //gets the number of likes on the photo and creates a like button 
     function getlikes(image) {
-        $.get(`https://photo-contest-project.herokuapp.com/likes/${image}`, (object) => {
+        $.ajax({
+            url: `https://photo-contest-project.herokuapp.com/likes/${image}`,
+            type: "GET",
+            data: "JSON"
+            }).done(function(object) {
+                $(".like-button").empty()
+                $(".like-button").append(`<button type="button" class="btn btn-primary btn-lg" id="${image}"><span class="glyphicon">&#xe125;</span> ${object.likes}</button>`)
+            })
+        /**$.get(`https://photo-contest-project.herokuapp.com/likes/${image}`, (object) => {
             $(".like-button").empty()
             $(".like-button").append(`<button type="button" class="btn btn-primary btn-lg" id="${image}"><span class="glyphicon">&#xe125;</span> ${object.likes}</button>`)
-        })
+        })**/
     }
 
     //adds photo the photo gallery on the homepage
@@ -159,7 +174,12 @@
 
     //add a like to the photo
     function addLike(clickedPhoto) {
-        $.post(`https://photo-contest-project.herokuapp.com/like/${clickedPhoto}`)
+        $.ajax({
+            url: `https://photo-contest-project.herokuapp.com/like/${clickedPhoto}`,
+            type: "POST",
+            data: "JSON"
+            })
+        /**$.post(`https://photo-contest-project.herokuapp.com/like/${clickedPhoto}`)**/
     }
 
 </script>
