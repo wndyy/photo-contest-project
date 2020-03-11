@@ -13,7 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 mongoose.Promise = Promise
 
-var db_url = 'mongodb+srv://photo-user:user@cluster0-ejunx.mongodb.net/test?retryWrites=true&w=majority'
+var db_url = process.env.MONGOLAB_URI
+//var db_url = 'mongodb+srv://photo-user:user@cluster0-ejunx.mongodb.net/test?retryWrites=true&w=majority'
 
 var schema = new mongoose.Schema({fileName: String,
                                 contactName: String,
