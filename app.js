@@ -16,7 +16,7 @@ mongoose.Promise = Promise
 var db_url = process.env.MONGOLAB_URI
 //var db_url = 'mongodb+srv://photo-user:user@cluster0-ejunx.mongodb.net/test?retryWrites=true&w=majority'
 const MONGODB_USER = "photo-user";
-const MONGODB_PASS = "myasri*$user:nG*#o";
+const MONGODB_PASS = "user";
 
 const authData =  {
     "user": MONGODB_USER,
