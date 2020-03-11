@@ -35,7 +35,8 @@ var schema = new mongoose.Schema({fileName: String,
 var connection = mongoose.createConnection(db_url, { useUnifiedTopology: true, useNewUrlParser: true })
 var Photo = connection.model('Photo', schema)
 
-var try_db = mongoose.connect(db_url)
+mongoose.connect(db_url)
+try_db = mongoose.connection
 
 try_db.on("error", function(err){
     console.log("Mongoose connection error" + err);
