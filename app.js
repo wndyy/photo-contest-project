@@ -32,7 +32,7 @@ var schema = new mongoose.Schema({fileName: String,
                                 contactEmail: String,
                                 likes: Number})
 
-var connection = mongoose.createConnection(db_url, { useMongoClient: true, useUnifiedTopology: true, useNewUrlParser: true })
+var connection = mongoose.createConnection(db_url, { useUnifiedTopology: true, useNewUrlParser: true })
 var Photo = connection.model('Photo', schema)
 
 app.use(express.static(__dirname))
@@ -40,7 +40,7 @@ var server = app.listen(process.env.PORT || 3000, () => {
     console.log('server is listening on port', server.address().port)
 })
 
-var conn = mongoose.createConnection(db_url, { useMongoClient: true, useUnifiedTopology: true, useNewUrlParser: true })
+var conn = mongoose.createConnection(db_url, { useUnifiedTopology: true, useNewUrlParser: true })
 
 let gfs
 
