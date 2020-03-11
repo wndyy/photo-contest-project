@@ -15,13 +15,22 @@ mongoose.Promise = Promise
 
 var db_url = process.env.MONGOLAB_URI
 //var db_url = 'mongodb+srv://photo-user:user@cluster0-ejunx.mongodb.net/test?retryWrites=true&w=majority'
+const MONGODB_USER = "photo-user";
+const MONGODB_PASS = "myasri*$user:nG*#o";
+
+const authData =  {
+    "user": MONGODB_USER,
+    "pass": MONGODB_PASS,
+    "useNewUrlParser": true,
+    "useCreateIndex": true
+}; 
 
 var schema = new mongoose.Schema({fileName: String,
                                 contactName: String,
                                 contactEmail: String,
                                 likes: Number})
 
-var connection = mongoose.createConnection(db_url)
+var connection = mongoose.createConnection(db_url, authData)
 var Photo = connection.model('Photo', schema)
 
 app.use(express.static(__dirname))
@@ -29,9 +38,7 @@ var server = app.listen(process.env.PORT || 3000, () => {
     console.log('server is listening on port', server.address().port)
 })
 
-var conn = mongoose.createConnection(db_url, { 
-    useNewUrlParser: true,
-    useUnifiedTopology: true})
+var conn = mongoose.createConnection(db_url, authData)
 
 let gfs
 
