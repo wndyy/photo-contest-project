@@ -21,7 +21,12 @@ var schema = new mongoose.Schema({fileName: String,
                                 contactEmail: String,
                                 likes: Number})
 
-var connection = mongoose.createConnection(db_url, { useNewUrlParser: true })
+var connection = mongoose.createConnection(db_url, {
+    auth: {
+        user: photo-user,
+        password: user
+    }
+}, { useNewUrlParser: true })
 var Photo = connection.model('Photo', schema)
 
 app.use(express.static(__dirname))
