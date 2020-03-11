@@ -38,6 +38,12 @@ var Photo = connection.model('Photo', schema)
 mongoose.connect(db_url)
 try_db = mongoose.connection
 
+mongodb.MongoClient.connect(db_url, function (err, db) {
+    if (err) {
+        console.log("error", err)
+    }
+})
+
 try_db.on("error", function(err){
     console.log("Mongoose connection error" + err);
 });
