@@ -131,14 +131,14 @@
 
     //retrieves all the photos in the database
     function getPhotos() {
-        $.get('http://localhost:3000/photos', (photo) => {
+        $.get('https://photo-contest-project.herokuapp.com/photos', (photo) => {
             photo.forEach(addPhoto);
         })
     }
 
     //gets the number of likes on the photo and creates a like button 
     function getlikes(image) {
-        $.get(`http://localhost:3000/likes/${image}`, (object) => {
+        $.get(`https://photo-contest-project.herokuapp.com/likes/${image}`, (object) => {
             $(".like-button").empty()
             $(".like-button").append(`<button type="button" class="btn btn-primary btn-lg" id="${image}"><span class="glyphicon">&#xe125;</span> ${object.likes}</button>`)
         })
@@ -159,7 +159,7 @@
 
     //add a like to the photo
     function addLike(clickedPhoto) {
-        $.post(`http://localhost:3000/like/${clickedPhoto}`)
+        $.post(`https://photo-contest-project.herokuapp.com/like/${clickedPhoto}`)
     }
 
 </script>
