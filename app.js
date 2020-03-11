@@ -20,7 +20,7 @@ var schema = new mongoose.Schema({fileName: String,
                                 contactEmail: String,
                                 likes: Number})
 
-var connection = mongoose.createConnection(db_url)
+var connection = mongoose.createConnection(process.env.MONGODB_URI || db_url)
 var Photo = connection.model('Photo', schema)
 
 app.use(express.static(__dirname))
@@ -28,7 +28,7 @@ var server = app.listen(process.env.PORT || 3000, () => {
     console.log('server is listening on port', server.address().port)
 })
 
-var conn = mongoose.createConnection(db_url, { 
+var conn = mongoose.createConnection(process.env.MONGODB_URI || db_url, { 
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
