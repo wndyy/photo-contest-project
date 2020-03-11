@@ -26,7 +26,7 @@ var connection = mongoose.createConnection(db_url, {
         user: photo-user,
         password: user
     }
-}, { useNewUrlParser: true })
+})
 var Photo = connection.model('Photo', schema)
 
 app.use(express.static(__dirname))
@@ -34,9 +34,14 @@ var server = app.listen(process.env.PORT || 3000, () => {
     console.log('server is listening on port', server.address().port)
 })
 
-var conn = mongoose.createConnection(db_url, { 
+var conn = mongoose.createConnection(db_url, /**{ 
     useNewUrlParser: true,
     useUnifiedTopology: true
+}**/ {
+    auth: {
+        user: photo-user,
+        password: user
+    }
 })
 
 let gfs
