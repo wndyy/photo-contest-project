@@ -36,18 +36,9 @@ var schema = new mongoose.Schema({fileName: String,
 var connection = mongoose.createConnection(db_url, { useUnifiedTopology: true, useNewUrlParser: true })
 var Photo = connection.model('Photo', schema)
 
-mongoose.connect(db_url)
-try_db = mongoose.connection
-
-mongodb.MongoClient.connect(db_url, function (err, db) {
-    if (err) {
-        console.log("error", err)
-    }
-})
-
-try_db.on("error", function(err){
-    console.log("Mongoose connection error" + err);
-});
+mongoose.connect(db_url, { useNewUrlParser: true })
+    .then(() => console.log("Mongodb connected!!!!!!!!"))
+    .catch(err => console.log(err))
 
 app.use(express.static(__dirname))
 var server = app.listen(process.env.PORT || 3000, () => {
