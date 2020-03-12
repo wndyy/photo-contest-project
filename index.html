@@ -63,11 +63,18 @@
             column-count:         2;
             }
         }
-        @media (max-width: 400px) {
+        @media (max-width: 600px) {
             .photoGallery {
-            -moz-column-count:    1;
-            -webkit-column-count: 1;
-            column-count:         1;
+            /**-moz-column-count:   1;
+            -webkit-column-count:   1;
+            column-count:           1;**/
+            -moz-column-count: initial;
+            -webkit-column-count: initial;
+            column-count: initial;
+            }
+            .photoGallery img {
+                width: 100%;
+                margin-bottom: 0.75em;
             }
         }
 
