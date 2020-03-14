@@ -5,16 +5,9 @@
     <!--https://css-tricks.com/seamless-responsive-photo-grid/-->
     <style>
         .photoGallery {
-            line-height: 0;
-            
-            -webkit-column-count: 5;
-            -webkit-column-gap:   0em;
-            -moz-column-count:    5;
-            -moz-column-gap:      0em;
-            column-count:         5;
-            column-gap:           0em;
+            width: 100%;
         }
-
+        
         .photoGallery img {
             cursor: pointer;
             width: 97% !important;
@@ -40,6 +33,19 @@
 
         .like-button button{
             margin-bottom: 1.5em;
+        }
+
+        @media (max-width: 3000px) {
+            .photoGallery {
+            line-height: 0;
+            
+            -webkit-column-count: 5;
+            -webkit-column-gap:   0em;
+            -moz-column-count:    5;
+            -moz-column-gap:      0em;
+            column-count:         5;
+            column-gap:           0em;
+            }
         }
 
         @media (max-width: 1200px) {
