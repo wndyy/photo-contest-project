@@ -139,7 +139,7 @@
             getlikes(photoID_button)
             }
         )
-        $.ajax({
+        var what = $.ajax({
             url: 'https://photo-contest-project.herokuapp.com/photos',
             type: "GET",
             cache: false,
@@ -148,6 +148,7 @@
                 $(".photoGallery").append(`<p>getting the photos yo</p>`)
                 photo.forEach(addPhoto);
             })
+        console.log(what)
         /**getPhotos()
         $(".photoGallery").append(`<p>picture here - yoooooo</p>
                                     <img src="/photo/7b40c2095f03066b5f191952d7e85450.jpg" id="7b40c2095f03066b5f191952d7e85450.jpg">`
