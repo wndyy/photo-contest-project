@@ -4,7 +4,17 @@
 
     <!--https://css-tricks.com/seamless-responsive-photo-grid/-->
     <style>
+
         .photoGallery {
+            -moz-column-count:   initial;
+            -webkit-column-count: initial;
+            column-count:        initial;
+            background: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        /**.photoGallery {
             line-height: 0;
             
             -webkit-column-count: 5;
@@ -13,7 +23,7 @@
             -moz-column-gap:      0em;
             column-count:         5;
             column-gap:           0em;
-        }
+        }**/
 
         .photoGallery img {
             cursor: pointer;
@@ -42,7 +52,7 @@
             margin-bottom: 1.5em;
         }
 
-        @media (max-width: 1200px) {
+        /**@media (max-width: 1200px) {
             .photoGallery {
             -moz-column-count:    4;
             -webkit-column-count: 4;
@@ -63,16 +73,16 @@
             column-count:         2;
             }
         }
-        @media (max-width: 600px) {
+        @media (max-width: 400px) {
             .photoGallery {
             -moz-column-count:   initial;
             -webkit-column-count: initial;
             column-count:        initial;
-            background: yellow;
+            background: white;
             text-align: center;
             width: 100%;
             }
-        }
+        }**/
 
         body {
             margin: 0;
