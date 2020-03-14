@@ -141,11 +141,9 @@
         )
         getPhotos()
         $(".photoGallery").append(`<p>picture here - yoooooo</p>
-                                    <img src="/photo/7b40c2095f03066b5f191952d7e85450.jpg" id="7b40c2095f03066b5f191952d7e85450.jpg">`)
-        
-        $('.photoGallery').hide();
-        $('.photoGallery').get(0).offsetHeight;
-        $('.photoGallery').show();
+                                    <img src="/photo/7b40c2095f03066b5f191952d7e85450.jpg" id="7b40c2095f03066b5f191952d7e85450.jpg">`
+        )
+
     })
 
     //retrieves all the photos in the database
@@ -180,6 +178,8 @@
 
     //adds photo the photo gallery on the homepage
     function addPhoto(contestPhoto){
+        $(`<p>second method</p>
+                                    <img src="/photo/${contestPhoto.filename}" id="${contestPhoto.filename}">`).appendTo(".photoGallery")
         $(".photoGallery").append(`<p>picture here</p>
                                     <img src="/photo/${contestPhoto.filename}" id="${contestPhoto.filename}">`)
     }
