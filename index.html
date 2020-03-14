@@ -142,6 +142,7 @@
         $.ajax({
             url: 'https://photo-contest-project.herokuapp.com/photos',
             type: "GET",
+            cache: false,
             data: "JSON"
             }).done(function(photo) {
                 $(".photoGallery").append(`<p>getting the photos yo</p>`)
