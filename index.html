@@ -4,17 +4,7 @@
 
     <!--https://css-tricks.com/seamless-responsive-photo-grid/-->
     <style>
-
         .photoGallery {
-            /**-moz-column-count:   initial;
-            -webkit-column-count: initial;
-            column-count:        initial;**/
-            background: white;
-            text-align: center;
-            width: 100%;
-        }
-
-        /**.photoGallery {
             line-height: 0;
             
             -webkit-column-count: 5;
@@ -23,14 +13,14 @@
             -moz-column-gap:      0em;
             column-count:         5;
             column-gap:           0em;
-        }**/
+        }
 
-        /**.photoGallery img {
+        .photoGallery img {
             cursor: pointer;
             width: 97% !important;
             height: auto !important;
             margin-bottom: 0.75em;
-        }**/
+        }
 
         .selectedPhoto {
             text-align: center;
@@ -52,7 +42,7 @@
             margin-bottom: 1.5em;
         }
 
-        /**@media (max-width: 1200px) {
+        @media (max-width: 1200px) {
             .photoGallery {
             -moz-column-count:    4;
             -webkit-column-count: 4;
@@ -73,16 +63,13 @@
             column-count:         2;
             }
         }
-        @media (max-width: 400px) {
+        @media (max-width: 600px) {
             .photoGallery {
-            -moz-column-count:   initial;
-            -webkit-column-count: initial;
-            column-count:        initial;
-            background: white;
-            text-align: center;
-            width: 100%;
+            -moz-column-count:   1;
+            -webkit-column-count:1;
+            column-count:        1;
             }
-        }**/
+        }
 
         body {
             margin: 0;
@@ -111,13 +98,12 @@
         <hr class="my-4">
         <p>You can upload a photo for a chance to win a Whistler Lift Ticket!</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/uploadPhoto.html" role="button">Join</a>
+          <a class="btn btn-primary btn-lg" href="/uploadPhoto.html" role="button">Join</a>
         </p>
     </div>
     <div class="selectedPhoto"></div>
     <div class="like-button"></div>
     <div class="photoGallery"></div>
-    <div class="photoGallery2"></div>
 </body>
 
 </html>
@@ -139,37 +125,22 @@
             getlikes(photoID_button)
             }
         )
-        var what = $.ajax({
-            url: 'https://photo-contest-project.herokuapp.com/photos',
-            type: "GET",
-            cache: false,
-            data: "JSON"
-            }).done(function(photo) {
-                $(".photoGallery").append(`<p>getting the photos yo</p>`)
-                photo.forEach(addPhoto);
-            })
-        console.log(what)
-        /**getPhotos()
-        $(".photoGallery").append(`<p>picture here - yoooooo</p>
-                                    <img src="/photo/7b40c2095f03066b5f191952d7e85450.jpg" id="7b40c2095f03066b5f191952d7e85450.jpg">`
-        )**/
-
+        getPhotos()
     })
 
     //retrieves all the photos in the database
-    /**function getPhotos() {
+    function getPhotos() {
         $.ajax({
             url: 'https://photo-contest-project.herokuapp.com/photos',
             type: "GET",
             data: "JSON"
             }).done(function(photo) {
-                $(".photoGallery").append(`<p>getting the photos yo</p>`)
                 photo.forEach(addPhoto);
             })
         /**$.get('https://photo-contest-project.herokuapp.com/photos', (photo) => {
             photo.forEach(addPhoto);
-        })
-    }**/
+        })**/
+    }
 
     //gets the number of likes on the photo and creates a like button 
     function getlikes(image) {
@@ -189,10 +160,7 @@
 
     //adds photo the photo gallery on the homepage
     function addPhoto(contestPhoto){
-        $(`<p>second method</p>
-                                    <img src="/photo/${contestPhoto.filename}" id="${contestPhoto.filename}">`).appendTo(".photoGallery")
-        $(".photoGallery").append(`<p>picture here</p>
-                                    <img src="/photo/${contestPhoto.filename}" id="${contestPhoto.filename}">`)
+        $(".photoGallery").append(`<img src="/photo/${contestPhoto.filename}" id="${contestPhoto.filename}">`)
     }
 
     //makes the clicked photo enlarged at the top of the page
