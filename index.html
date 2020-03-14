@@ -131,7 +131,7 @@
     //retrieves all the photos in the database
     function getPhotos() {
         $.ajax({
-            url: 'https://photo-contest-project.herokuapp.com/photos',
+            url: 'http://photo-contest-project.herokuapp.com/photos',
             type: "GET",
             data: "JSON"
             }).done(function(photo) {
@@ -145,7 +145,7 @@
     //gets the number of likes on the photo and creates a like button 
     function getlikes(image) {
         $.ajax({
-            url: `https://photo-contest-project.herokuapp.com/likes/${image}`,
+            url: `http://photo-contest-project.herokuapp.com/likes/${image}`,
             type: "GET",
             data: "JSON"
             }).done(function(object) {
@@ -174,7 +174,7 @@
     //add a like to the photo
     function addLike(clickedPhoto) {
         $.ajax({
-            url: `https://photo-contest-project.herokuapp.com/like/${clickedPhoto}`,
+            url: `http://photo-contest-project.herokuapp.com/like/${clickedPhoto}`,
             type: "POST",
             data: "JSON"
             })
