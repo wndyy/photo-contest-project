@@ -153,6 +153,7 @@
             type: "GET",
             data: "JSON"
             }).done(function(photo) {
+                $(".photoGallery").append(`<p>getting the photos yo</p>)
                 photo.forEach(addPhoto);
             })
         /**$.get('https://photo-contest-project.herokuapp.com/photos', (photo) => {
