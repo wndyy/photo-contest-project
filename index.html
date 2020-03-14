@@ -148,17 +148,17 @@
 
     //retrieves all the photos in the database
     function getPhotos() {
-        $.ajax({
+        /**$.ajax({
             url: 'https://photo-contest-project.herokuapp.com/photos',
             type: "GET",
             data: "JSON"
             }).done(function(photo) {
                 $(".photoGallery").append(`<p>getting the photos yo</p>`)
                 photo.forEach(addPhoto);
-            })
-        /**$.get('https://photo-contest-project.herokuapp.com/photos', (photo) => {
+            })**/
+        $.get('https://photo-contest-project.herokuapp.com/photos', (photo) => {
             photo.forEach(addPhoto);
-        })**/
+        })
     }
 
     //gets the number of likes on the photo and creates a like button 
