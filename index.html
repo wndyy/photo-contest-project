@@ -105,6 +105,7 @@
     </div>
     <div class="selectedPhoto"></div>
     <div class="like-button"></div>
+    <div class="liked-button"></div>
     <div class="photoGallery"></div>
 </body>
 
@@ -124,7 +125,7 @@
         $('.like-button').on('click','button',function(){
             let photoID_button = $(this).attr('id')
             addLike(photoID_button)
-            getlikes(photoID_button)
+            getlikedButton(photoID_button)
             }
         )
         getPhotos()
@@ -152,12 +153,25 @@
             data: "JSON"
             }).done(function(object) {
                 $(".like-button").empty()
+                $(".liked-button").empty()
                 $(".like-button").append(`<button type="button" class="btn btn-primary btn-lg" id="${image}"><span class="glyphicon">&#xe125;</span> ${object.likes}</button>`)
             })
         /**$.get(`https://photo-contest-project.herokuapp.com/likes/${image}`, (object) => {
             $(".like-button").empty()
             $(".like-button").append(`<button type="button" class="btn btn-primary btn-lg" id="${image}"><span class="glyphicon">&#xe125;</span> ${object.likes}</button>`)
         })**/
+    }
+
+    function getlikedButton(image) {
+        $.ajax({
+            url: `https://photo-contest-project.herokuapp.com/likes/${image}`,
+            type: "GET",
+            data: "JSON"
+            }).done(function(object) {
+                $(".like-button").empty()
+                $(".liked-button").empty()
+                $(".liked-button").append(`<button type="button" class="btn btn-lg btn-primary" id="${image}" disabled><span class="glyphicon">&#xe125;</span> ${object.likes}</button>`)
+            })
     }
 
     //adds photo the photo gallery on the homepage
