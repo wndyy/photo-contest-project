@@ -15,18 +15,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 mongoose.Promise = Promise
 
 var db_url = process.env.MONGOLAB_URI
-//var db_url = 'mongodb+srv://photo-user:user@cluster0-ejunx.mongodb.net/test?retryWrites=true&w=majority'
-//const MONGODB_USER = "photo-user";
-//const MONGODB_PASS = "user";
-
-/**const authData =  {
-    "user": MONGODB_USER,
-    "pass": MONGODB_PASS,
-    "useNewUrlParser": true,
-    "useCreateIndex": true,
-    "useUnifiedTopology": true,
-    useMongoClient: true
-};**/
 
 var schema = new mongoose.Schema({fileName: String,
                                 contactName: String,
@@ -35,10 +23,6 @@ var schema = new mongoose.Schema({fileName: String,
 
 var connection = mongoose.createConnection(db_url, { useUnifiedTopology: true, useNewUrlParser: true })
 var Photo = connection.model('Photo', schema)
-
-mongoose.connect(db_url, { useNewUrlParser: true })
-    .then(() => console.log("Mongodb connected!!!!!!!!"))
-    .catch(err => console.log(err))
 
 app.use(express.static(__dirname))
 var server = app.listen(process.env.PORT || 3000, () => {
